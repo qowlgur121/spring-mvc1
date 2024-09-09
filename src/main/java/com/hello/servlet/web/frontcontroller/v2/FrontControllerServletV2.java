@@ -28,16 +28,15 @@ public class FrontControllerServletV2 extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String requestURI = request.getRequestURI();
+        String requestURI = request.getRequestURI(); //요청 URI를 찾고
 
-        ControllerV2 controller = controllerMap.get(requestURI);
+        ControllerV2 controller = controllerMap.get(requestURI); //요청 URI에 맞는 컨트롤러 찾는다.
         if (controller == null) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
 
-        MyView view = controller.process(request, response);
-        view.render(request, response);
-
+        MyView view = controller.process(request, response);  //컨트롤러에게 파라미터 넘겨줘서 뷰에 대한 정보를 얻는다.
+        view.render(request, response); //화면을 그린다.
     }
 }
