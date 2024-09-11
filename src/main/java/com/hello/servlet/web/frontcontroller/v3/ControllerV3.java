@@ -6,5 +6,7 @@ import java.util.Map;
 
 public interface ControllerV3 {
 
-    ModelView process(Map<String, String> paramMap);
+    //모델과 뷰의 정보를 담당하는 ModelView를 반환한다.
+    ModelView process(Map<String, String> paramMap); //v2에서는 MyView를 반환했었는데 v3에서는 ModelView를 반환한다.
+
 }
