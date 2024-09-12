@@ -33,33 +33,33 @@ public class FrontControllerServletV5 extends HttpServlet {
         initHandlerAdapters();
     }
 
-    private void initHandlerMappingMap() {
+    private void initHandlerMappingMap() { //URL 패턴에 맞는 요청을 처리할 핸들러를 매핑한다.
         handlerMappingMap.put("/front-controller/v5/v3/members/new-form", new MemberFormControllerV3());
         handlerMappingMap.put("/front-controller/v5/v3/members/save", new MemberSaveControllerV3());
         handlerMappingMap.put("/front-controller/v5/v3/members", new MemberListControllerV3());
     }
 
-    private void initHandlerAdapters() {
+    private void initHandlerAdapters() { //핸들러 어댑터들을 추가한다.
         handlerAdapters.add(new ControllerV3HandlerAdapter());
     }
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Object handler = getHandler(request);
+        Object handler = getHandler(request); //요청 URL에 맞는 핸들러를 initHandlerMappingMap에서 가져온다.
         if (handler == null) { //컨트롤러가 없는 경우
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
 
-        MyHandlerAdapter adapter = getHandlerAdapter(handler);
+        MyHandlerAdapter adapter = getHandlerAdapter(handler); //위의 핸들러를 처리할 수 있는 어댑터를 가져온다.
 
-        ModelView mv = adapter.handle(request, response, handler);
+        ModelView mv = adapter.handle(request, response, handler); //어댑터를 통해 핸들러를 실행하고 ModelView를 받는다.
 
-        String viewName = mv.getViewName();
-        MyView view = viewResolver(viewName);
+        String viewName = mv.getViewName(); //모델뷰를 통해 뷰의 논리이름을 받는다.
+        MyView view = viewResolver(viewName); //뷰의 논리이름->실제 뷰 경로로 변환
 
-        view.render(mv.getModel(), request, response);
+        view.render(mv.getModel(), request, response); //뷰 렌더링
     }
 
     private MyHandlerAdapter getHandlerAdapter(Object handler) {
