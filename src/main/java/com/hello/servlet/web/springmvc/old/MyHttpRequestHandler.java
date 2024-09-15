@@ -8,6 +8,11 @@ import org.springframework.web.HttpRequestHandler;
 
 import java.io.IOException;
 
+/**
+ * @Component("/springmvc/request-handler")은
+ * 스프링 컨테이너에 등록.
+ * 이 컨트롤러가 처리할 URL("/springmvc/request-handler")을 스프링에게 알려준다.
+ */
 @Component("/springmvc/request-handler")
 public class MyHttpRequestHandler implements HttpRequestHandler {
     @Override
