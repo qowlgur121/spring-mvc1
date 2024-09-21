@@ -15,6 +15,7 @@ public class SpringMemberSaveControllerV1 {
 
     @RequestMapping("/springmvc/v1/members/save")
     public ModelAndView process(HttpServletRequest request, HttpServletResponse response) {
+        //이렇게 (HttpServletRequest request, HttpServletResponse response)를 컨트롤러 메서드의 파라미터로 선언하면 스프링이 알아서 주입해준다.
 
         String username = request.getParameter("username");
         int age = Integer.parseInt(request.getParameter("age"));

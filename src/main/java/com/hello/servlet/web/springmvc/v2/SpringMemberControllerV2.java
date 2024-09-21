@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping("/springmvc/v2/members")
+@RequestMapping("/springmvc/v2/members") //여기서 설정된 URL이 메서드에 붙은 @RequestMapping에 설정된 URL과 합쳐진다 -> URL 중복제거
 public class SpringMemberControllerV2 {
 
     private MemberRepository memberRepository = MemberRepository.getInstance();

@@ -24,21 +24,21 @@ public class SpringMemberControllerV3 {
 
     private MemberRepository memberRepository = MemberRepository.getInstance();
 
-    @GetMapping("/new-form")
-    public String newForm() {
+    @GetMapping("/new-form") //v2에서는 RequestMapping 하나로만 처리했던 것을 v3에서는 세분화하여 가독성을 높혔고 또 요청http메서드를 제한시킴.
+    public String newForm() { //v2에서는 ModelAndView를 직접 생성해서 반환했는데 v3에선 뷰의 논리적 이름만 반환 -> 코드 간결화
         return "new-form";
     }
 
     @PostMapping("/save")
     public String save(
-            @RequestParam("username") String username,
+            @RequestParam("username") String username, //요청 파라미터인 "username"을 username 변수에 바인딩(연결)
             @RequestParam("age") int age,
-            Model model) {
+            Model model) { //Model 객체를 통해 뷰에 전달할 데이터 추가
 
         Member member = new Member(username, age);
         memberRepository.save(member);
 
-        model.addAttribute("member", member);
+        model.addAttribute("member", member); //뷰에 전달할 모델 값을 설정
         return "save-result";
     }
 
